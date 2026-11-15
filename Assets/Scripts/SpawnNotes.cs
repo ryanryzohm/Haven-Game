@@ -37,14 +37,14 @@ public class SpawnNotes : MonoBehaviour
 
     void Awake()
     {
-
+        TextAsset chartJson = Resources.Load<TextAsset>("main_chart");
            Debug.Log(chartJson);
         LoadChart(chartJson); // this should load the current chart //
         foreach (Note note in LoadedChart)
         {
             SpawnNote(note);
         }
-    }    TextAsset chartJson = Resources.Load<TextAsset>("main_chart");
+    }
  
 
     // Update is called once per frame

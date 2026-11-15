@@ -2,18 +2,27 @@ using System;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SocialPlatforms.Impl;
+
 
 public class MovementDriver : MonoBehaviour
 {
+    static int ScoreCounter;
     private NoteAppearance noteAppearance;
-    private float yval;
-    private float xval;
-    private float time;
+    private double yval;
+    private double xval;
+    private double time;
     private int pressedeval = 0;
-    float hitX;
+    double hitX;
+    public double slowMovement;
+    private double spawnTime;
+    private double prevTime = 0;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        spawnTime = AudioSettings.dspTime;
+
         noteAppearance = GetComponent<NoteAppearance>();
         switch (noteAppearance.NoteLane)
         {
@@ -31,7 +40,7 @@ public class MovementDriver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
+        time += (AudioSettings.dspTime - spawnTime) / slowMovement - prevTime - noteAppearance.NoteBeat;
 
         switch (noteAppearance.NoteLane)
         {
@@ -39,71 +48,76 @@ public class MovementDriver : MonoBehaviour
             case 1:
                 if (pressedeval == 0)
                 {
-                    xval = -8 + 10f * time; //change it to audio time later
-                    yval = -0.26f * Mathf.Pow(xval + 8, 2) + 3;
-                    noteAppearance.transform.position = new Vector3(xval, yval, transform.position.z);
+                    xval = -8 + 10d*time; //change it to audio time later
+                    yval = -0.26d * Mathf.Pow((float)xval + 8, 2) + 3;
+                    noteAppearance.transform.position = new Vector3((float)xval, (float)yval, transform.position.z);
                     if (Keyboard.current.fKey.wasPressedThisFrame && noteAppearance.transform.position.x >= -3.75 && noteAppearance.transform.position.x <= -3.25)
                     {
+                        ScoreCounter += 2;
                         pressedeval = 2;
-                        yval = -0.26f * Mathf.Pow(xval - 2, 2) + 3; //convert to c# readable code    
+                        yval = -0.26f * Mathf.Pow((float)xval - 2, 2) + 3; //convert to c# readable code    
                         hitX = xval;
                     }
                     else if (Keyboard.current.fKey.wasPressedThisFrame && noteAppearance.transform.position.x >= -4 && noteAppearance.transform.position.x <= -3)
                     {
+                        ScoreCounter += 1;
                         pressedeval = 1;
-                        yval = -3f * Mathf.Pow(xval + 2.2f, 2) + 5   ;
+                        yval = -3f * Mathf.Pow((float)xval + 2.2f, 2) + 5   ;
                     }
                 }
                 else if (pressedeval == 2)
                 {
-                    xval = -8 + 10f * time; //change it to audio time later
-                    yval = -0.26f * Mathf.Pow(xval - 2, 2) + 3;
-                    noteAppearance.transform.position = new Vector3(xval, yval, transform.position.z);
+                    xval = -8 + 10d * time;
+                    yval = -0.26f * Mathf.Pow((float)xval - 2, 2) + 3;
+                    noteAppearance.transform.position = new Vector3((float)xval, (float)yval, transform.position.z);
                 }
                 else if (pressedeval == 1)
                 {
-                    xval = xval += 0.005f * time; //please make it so it just slows the note down instead of yanking it to the other side of the screen
+                    xval = xval += 0.035f * time; //please make it so it just slows the note down instead of yanking it to the other side of the screen
 
-                    yval = -3f * Mathf.Pow(xval + 2.2f, 2) +5;
-                    noteAppearance.transform.position = new Vector3(xval, yval, transform.position.z);
+                    yval = -3f * Mathf.Pow((float)xval + 2.2f, 2) +5;
+                    noteAppearance.transform.position = new Vector3((float)xval, (float)yval, transform.position.z);
                 }
 
                 break;
             case 2:
                 if (pressedeval == 0)
                 {
-                    xval = 8 - 10f * time; //change it to audio time later
-                    yval = -0.26f * Mathf.Pow(xval - 8, 2) + 3;
-                    noteAppearance.transform.position = new Vector3(xval, yval, transform.position.z);
+                    xval =  8-10d*time; //change it to audio time later
+                    yval = -0.26f * Mathf.Pow((float)xval - 8, 2) + 3;
+                    noteAppearance.transform.position = new Vector3((float)xval, (float)yval, transform.position.z);
                     if (Keyboard.current.jKey.wasPressedThisFrame && noteAppearance.transform.position.x >= 3.25 && noteAppearance.transform.position.x <= 3.75)
                     {
+                        ScoreCounter += 2;
                         pressedeval = 2;
-                        yval = -0.26f * Mathf.Pow(xval + 2, 2) + 3; //convert to c# readable code    
+                        yval = -0.26f * Mathf.Pow((float)xval + 2, 2) + 3; //convert to c# readable code    
                         hitX = xval;
                     }
                     else if (Keyboard.current.jKey.wasPressedThisFrame && noteAppearance.transform.position.x >= 3 && noteAppearance.transform.position.x <= 4)
                     {
+                        ScoreCounter += 1;
                         pressedeval = 1;
-                        yval = -3f * Mathf.Pow(xval - 2.2f, 2) +5;
+                        yval = -3f * Mathf.Pow((float)xval - 2.2f, 2) +5;
                     }
                 }
                 else if (pressedeval == 2)
                 {
-                    xval = 8 - 10f * time; //change it to audio time later
-                    yval = -0.26f * Mathf.Pow(xval + 2, 2) + 3;
-                    noteAppearance.transform.position = new Vector3(xval, yval, transform.position.z);
+                    xval = 8 - 10d * time; //change it to audio time later
+                    yval = -0.26f * Mathf.Pow((float)xval + 2, 2) + 3;
+                    noteAppearance.transform.position = new Vector3((float)xval, (float)yval, transform.position.z);
                 }
                 else if (pressedeval == 1)
                 {
-                    xval = xval -=0.005f * time; //please make it so it just slows the note down instead of yanking it to the other side of the screen
+                    xval = xval -=0.035f * time; //please make it so it just slows the note down instead of yanking it to the other side of the screen
 
-                    yval = -3f * Mathf.Pow(xval - 2.2f, 2) +5;
-                    noteAppearance.transform.position = new Vector3(xval, yval, transform.position.z);
+                    yval = -3f * Mathf.Pow((float)xval - 2.2f, 2) +5;
+                    noteAppearance.transform.position = new Vector3((float)xval, (float)yval, transform.position.z);
                 }
         break;
         default:
                 break;
     }
+        prevTime = time;
 
         }
     }
