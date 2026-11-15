@@ -3,41 +3,52 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using System;
+using System.Text.Json;
 
 public class SpawnNotes : MonoBehaviour
 {
     [Serializable]
     public struct Note
     {
-        float hitBeat;
-        NoteType noteType;
+        public uint Lane { get; set; }
+        public float HitBeat { get; set; }
+        public NoteType NoteType { get; set; }
     }
     public List<Note> LoadedChart;
 
-    public void LoadChart()
+    public void LoadChart(TextAsset chartJson)
     {
-        // implement later //
+        LoadedChart = JsonSerializer.Deserialize<List<Note>>(chartJson.text);
+        foreach (Note note in LoadedChart)
+        {
+            Debug.Log(note.NoteType);
+        }
     }
 
     public NoteAppearance NotePrefab;
-    void SpawnNote(NoteType type, uint lane)
+    void SpawnNote(Note note)
     {
-        NoteAppearance note = Instantiate(NotePrefab);
-        note.Initialize(type, lane);
+        float beat = note.HitBeat;
+        NoteType type = note.NoteType;
+        uint lane = note.Lane;
+        NoteAppearance noteAppearance = Instantiate(NotePrefab);  // instantiate note
+        noteAppearance.Initialize(beat, type, lane);  // initialize note
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        SpawnNote(NoteType.Tap, 2);
-        SpawnNote(NoteType.Untimed, 3);
-        SpawnNote(NoteType.Hold, 4);
-        SpawnNote(NoteType.Release, 1);
+        TextAsset chartJson = Resources.Load<TextAsset>("main_chart");
+        Debug.Log(chartJson);
+        LoadChart(chartJson); // this should load the current chart //
+        foreach (Note note in LoadedChart)
+        {
+            SpawnNote(note);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // make this load charts //
+        // this should dynamically load the notes based on a spawn window //
     }
 }

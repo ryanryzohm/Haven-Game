@@ -23,10 +23,12 @@ public class NoteAppearance : MonoBehaviour
     }
 
     private uint noteLane;
+    private float noteBeat;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public void Initialize(NoteType type, uint lane)
+    public void Initialize(float beat, NoteType type, uint lane)
     {
-        noteLane = lane;
+        noteLane = lane;  // initialization happens here so we have to expose these to the other scripts
+        noteBeat = beat;
         
 
         switch (type)
@@ -46,6 +48,7 @@ public class NoteAppearance : MonoBehaviour
         }
     }
     public uint NoteLane { get=>noteLane; private set=>noteLane=value; }
+    public float NoteBeat { get => noteBeat; private set => noteBeat = value; }
 }
 
     
