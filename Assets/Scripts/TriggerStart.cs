@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TriggerMech : MonoBehaviour
+public class TriggerStart : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,7 +14,7 @@ public class TriggerMech : MonoBehaviour
     {
         
     }
-    private void OnMouseDown()
+    public void StartGame()
     {
         SceneManager.LoadScene("rhythmGame");
     }
