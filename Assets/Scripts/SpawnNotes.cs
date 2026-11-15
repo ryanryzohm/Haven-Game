@@ -3,6 +3,11 @@ using UnityEngine.InputSystem;
 
 public class SpawnNotes : MonoBehaviour
 {
+    public struct Note
+    {
+        float spawnTime;
+        float hitTime;
+    }
     public NoteAppearance NotePrefab;
     void SpawnNote(NoteType type)
     {
