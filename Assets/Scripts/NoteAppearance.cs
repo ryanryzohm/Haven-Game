@@ -22,9 +22,13 @@ public class NoteAppearance : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    private uint noteLane;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public void Initialize(NoteType type)
+    public void Initialize(NoteType type, uint lane)
     {
+        noteLane = lane;
+        
+
         switch (type)
         {
             case NoteType.Tap:
@@ -41,10 +45,8 @@ public class NoteAppearance : MonoBehaviour
                 break;
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public uint NoteLane { get=>noteLane; private set=>noteLane=value; }
 }
+
+    
+    
