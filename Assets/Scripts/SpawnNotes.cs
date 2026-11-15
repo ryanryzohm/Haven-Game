@@ -1,13 +1,24 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
+using System;
 
 public class SpawnNotes : MonoBehaviour
 {
+    [Serializable]
     public struct Note
     {
-        float spawnTime;
-        float hitTime;
+        float hitBeat;
+        NoteType noteType;
     }
+    public List<Note> LoadedChart;
+
+    public void LoadChart()
+    {
+        // implement later //
+    }
+
     public NoteAppearance NotePrefab;
     void SpawnNote(NoteType type, uint lane)
     {

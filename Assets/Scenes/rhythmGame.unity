@@ -192,6 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84c9096500dcf64294e3172d7e44e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  LoadedChart: []
   NotePrefab: {fileID: 1105191246212918441, guid: f4f1f5b5e20a0b54f8de91d1f8e0dfeb, type: 3}
 --- !u!4 &798447237
 Transform:
@@ -258,7 +259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8038490385212398894, guid: 09a97f9e4e351464c813abdfeb45b1f2, type: 3}
       propertyPath: m_Name
-      value: judge_circle
+      value: judge_circle_f
       objectReference: {fileID: 0}
     - target: {fileID: 8973195732801476012, guid: 09a97f9e4e351464c813abdfeb45b1f2, type: 3}
       propertyPath: m_text
@@ -322,7 +323,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8038490385212398894, guid: 09a97f9e4e351464c813abdfeb45b1f2, type: 3}
       propertyPath: m_Name
-      value: judge_circle (1)
+      value: judge_circle_j
       objectReference: {fileID: 0}
     - target: {fileID: 8973195732801476012, guid: 09a97f9e4e351464c813abdfeb45b1f2, type: 3}
       propertyPath: m_text
