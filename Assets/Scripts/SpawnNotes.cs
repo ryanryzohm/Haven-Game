@@ -30,8 +30,6 @@ public class SpawnNotes : MonoBehaviour
     void Start()
     {
         SpawnNote(NoteType.Tap, 2);
-        SpawnNote(NoteType.Untimed, 3);
-        SpawnNote(NoteType.Hold, 4);
         SpawnNote(NoteType.Release, 1);
     }
 
