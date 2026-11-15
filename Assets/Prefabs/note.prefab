@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2980335228248717900}
   - component: {fileID: 8871377402701913740}
   - component: {fileID: 1105191246212918441}
+  - component: {fileID: 4136560244996833880}
   m_Layer: 0
   m_Name: note
   m_TagString: Untagged
@@ -109,3 +110,15 @@ MonoBehaviour:
   HoldSprite: {fileID: 2074086697008624754, guid: 28d5e6db95d34f7479c0bf6683067ce3, type: 3}
   UntimedSprite: {fileID: 2479033063172666037, guid: ed8faf6573cc6934e88b7e85b1412865, type: 3}
   ReleaseSprite: {fileID: -4809329682314951405, guid: ec33b0868f3ef3442905cdb19f55d9e1, type: 3}
+--- !u!114 &4136560244996833880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4365987893764183149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61b7f6e565c12604595e60e1df01f4ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
